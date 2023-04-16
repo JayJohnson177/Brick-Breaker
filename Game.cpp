@@ -64,7 +64,7 @@ int Game::start() {
 		brickPos[i].h = 30;
 		brickPos[i].x = bufferX;
 		brickPos[i].y = bufferY;
-		brickState[i] = 3;
+		brickState[i] = rand() % 4;
 
 		bufferX = bufferX + 43;
 		if (bufferX >= WIDTH) {
