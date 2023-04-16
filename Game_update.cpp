@@ -28,6 +28,8 @@ void Game::update() {
 		ball.y = 0;
 	}
 
+	//Checks for collision between the three main walls, flipping the X velocity upon hitting
+	//the left or right walls, and flipping the Y velocity upon hitting the top wall. 
 	if (SDL_HasIntersection(&ball, &l_wall) || SDL_HasIntersection(&ball, &r_wall)) { velX = -velX; }
 	if (SDL_HasIntersection(&ball, &t_wall)) { velY = -velY; }
 	

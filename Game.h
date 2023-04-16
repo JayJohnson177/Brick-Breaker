@@ -30,6 +30,7 @@ class Game
 	int l_s, r_s;
 	bool turn;
 
+	//Determines how many bricks spawn
 	int numSpawnedBricks = 30;
 	std::vector<int> brickState;
 	std::vector<SDL_Rect> brickPos;

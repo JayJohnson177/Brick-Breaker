@@ -54,19 +54,25 @@ int Game::start() {
 	t_wall.w = WIDTH;
 	t_wall.h = 10;
 
+	//Buffer for the positions of the spawned bricks
 	int bufferX = 0;
 	int bufferY = 40;
+	//Changes the vector size to match the amount of bricks we're spawning
 	brickPos.resize(numSpawnedBricks);
 	brickState.resize(numSpawnedBricks);
 
+	//For every brick, sets its parameters, and changes the buffer position over slightly 
 	for (int i = 0; i < numSpawnedBricks; i++) {
 		brickPos[i].w = 40;
 		brickPos[i].h = 30;
 		brickPos[i].x = bufferX;
 		brickPos[i].y = bufferY;
+		//Randomly determines how much health the associated brick has
 		brickState[i] = rand() % 4;
 
 		bufferX = bufferX + 43;
+		//If it starts spawning bricks offscreen, moves the Y buffer down and resets the X buffer
+		//resulting in new bricks spawning on the next line
 		if (bufferX >= WIDTH) {
 			bufferY += 35;
 			bufferX = 0;

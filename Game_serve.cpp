@@ -8,7 +8,7 @@
 
 //this starts off the game putting the ball in motion
 void Game::serve() {
-	//ball.x = rand() % ((WIDTH - 15) - 11) + 10;
+	//Randomly sets the ball position between the two walls in the arena.
 	ball.x = rand() % ((WIDTH - 15) - 11) + 10;
 	l_paddle.y = r_paddle.y = HEIGHT-l_paddle.h;
 	if (turn) {

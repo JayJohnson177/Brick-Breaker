@@ -26,6 +26,8 @@ void Game::render() {
 	SDL_RenderFillRect(renderer, &t_wall);
 
 	//SDL_SetRenderDrawColor(renderer, brickColor.r, brickColor.g, brickColor.b, 255);
+	//For each brick, checks the health, and changes the colour based on its health 
+	//before rendering it after the switch statement
 	for (int i = 0; i < numSpawnedBricks; i++) {
 		switch (brickState[i]) {
 		case 0:
