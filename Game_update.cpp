@@ -27,6 +27,9 @@ void Game::update() {
 		ball.x = rand() % WIDTH;
 		ball.y = 0;
 	}
+
+	if (SDL_HasIntersection(&ball, &l_wall) || SDL_HasIntersection(&ball, &r_wall)) { velX = -velX; }
+	if (SDL_HasIntersection(&ball, &t_wall)) { velY = -velY; }
 	
 
 	if (ball.y > r_paddle.y + (r_paddle.h / 2)) r_paddle.y += SPEED;
