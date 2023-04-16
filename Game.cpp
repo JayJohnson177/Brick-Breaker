@@ -49,6 +49,11 @@ int Game::start() {
 	r_wall.w = 10;
 	r_wall.h = HEIGHT;
 
+	t_wall.x = 0;
+	t_wall.y = 0;
+	t_wall.w = WIDTH;
+	t_wall.h = 10;
+
 	int bufferX = 0;
 	int bufferY = 40;
 	brickPos.resize(numSpawnedBricks);

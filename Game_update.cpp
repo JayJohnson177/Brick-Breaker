@@ -37,8 +37,8 @@ void Game::update() {
 	//hits the bottom
 	if (ball.y + SIZE >= HEIGHT) 
 	{
-		ball.x = rand() % WIDTH;
-		ball.y = 0;
+		ball.x = rand() % ((WIDTH - 32) - 33) + 32;
+		ball.y = 40;
 		playerLives--;
 
 		if (playerLives == 0)

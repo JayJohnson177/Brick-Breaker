@@ -24,7 +24,7 @@ class Game
 	int frameCount, timerFPS, lastFrame, fps;
 	int playerLives = 3000;
 	int dodgeCounter = 0;
-	SDL_Rect l_paddle, r_paddle, l_wall, r_wall, ball, score_board, middle_line;
+	SDL_Rect l_paddle, r_paddle, l_wall, r_wall, t_wall, ball, score_board, middle_line;
 	float velX, velY;
 	std::string score = "";
 	int l_s, r_s;

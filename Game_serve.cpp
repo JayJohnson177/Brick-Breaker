@@ -8,18 +8,21 @@
 
 //this starts off the game putting the ball in motion
 void Game::serve() {
-	ball.x = rand()% WIDTH - l_paddle.w;
+	//ball.x = rand() % ((WIDTH - 15) - 11) + 10;
+	ball.x = rand() % ((WIDTH - 15) - 11) + 10;
 	l_paddle.y = r_paddle.y = HEIGHT-l_paddle.h;
 	if (turn) {
-		ball.x = l_paddle.x + (l_paddle.w * 4);
+		//ball.x = l_paddle.x + (l_paddle.w * 4);
+		ball.x = rand() % ((WIDTH - 15) - 11) + 10;
 		velX = BALL_SPEED / 2;
 	}
 	else {
-		ball.x = r_paddle.x - (r_paddle.w * 4);
+		//ball.x = r_paddle.x - (r_paddle.w * 4);
+		ball.x = rand() % ((WIDTH - 15) - 11) + 10;
 		velX = -BALL_SPEED / 2;
 	}
 	velX = 0;
 	velY = BALL_SPEED;
-	ball.y = 0;
+	ball.y = 40;
 	turn = !turn;
 }

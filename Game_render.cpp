@@ -23,6 +23,7 @@ void Game::render() {
 	SDL_SetRenderDrawColor(renderer, wallColor.r, wallColor.g, wallColor.b, 255);
 	SDL_RenderFillRect(renderer, &r_wall);
 	SDL_RenderFillRect(renderer, &l_wall);
+	SDL_RenderFillRect(renderer, &t_wall);
 
 	SDL_SetRenderDrawColor(renderer, brickColor.r, brickColor.g, brickColor.b, 255);
 	for (int i = 0; i < numSpawnedBricks; i++) {
