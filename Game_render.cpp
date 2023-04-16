@@ -20,6 +20,15 @@ void Game::render() {
 	SDL_RenderFillRect(renderer, &ball);
 	SDL_RenderFillRect(renderer, &middle_line);
 
+	SDL_SetRenderDrawColor(renderer, wallColor.r, wallColor.g, wallColor.b, 255);
+	SDL_RenderFillRect(renderer, &r_wall);
+	SDL_RenderFillRect(renderer, &l_wall);
+
+	SDL_SetRenderDrawColor(renderer, brickColor.r, brickColor.g, brickColor.b, 255);
+	for (int i = 0; i < numSpawnedBricks; i++) {
+		SDL_RenderFillRect(renderer, &brickPos[i]);
+	}
+
 	SDL_RenderPresent(renderer);
 }
 

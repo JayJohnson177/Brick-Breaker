@@ -17,6 +17,13 @@ int Game::start() {
 
 	//defining the dimensions and positions of each object involved in the game
 	color.r = color.g = color.b = 255;
+	brickColor.r = 255;
+	brickColor.g = 0;
+	brickColor.b = 0;
+
+	wallColor.r = wallColor.g = wallColor.b = 0;
+
+
 	//paddles
 	l_s = r_s = 0;
 	l_paddle.x = WIDTH/2 -20; l_paddle.h = HEIGHT / 16;
@@ -31,6 +38,34 @@ int Game::start() {
 	//middle_line.y = 0;
 	//middle_line.w = 10;
 	//middle_line.h = HEIGHT;
+
+	l_wall.x = 0;
+	l_wall.y = 0;
+	l_wall.w = 10;
+	l_wall.h = HEIGHT;
+
+	r_wall.x = WIDTH - 10;
+	r_wall.y = 0;
+	r_wall.w = 10;
+	r_wall.h = HEIGHT;
+
+	int bufferX = 0;
+	int bufferY = 40;
+	brickPos.resize(numSpawnedBricks);
+	brickState.resize(numSpawnedBricks);
+
+	for (int i = 0; i < numSpawnedBricks; i++) {
+		brickPos[i].w = 40;
+		brickPos[i].h = 30;
+		brickPos[i].x = bufferX;
+		brickPos[i].y = bufferY;
+
+		bufferX = bufferX + 43;
+		if (bufferX >= WIDTH) {
+			bufferY += 35;
+			bufferX = 0;
+		}
+	}
 
 	//starting the game
 	serve();
@@ -50,6 +85,7 @@ int Game::start() {
 		render();
 	}
 	//ending the game,destroying the window,rederer and ending the loop
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
