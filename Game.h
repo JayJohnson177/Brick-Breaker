@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "SDL.h"
 
 
@@ -16,20 +17,25 @@
 
 class Game
 {
-	SDL_Renderer *renderer;
-	SDL_Window *window;
-	SDL_Color color;
+	SDL_Renderer* renderer;
+	SDL_Window* window;
+	SDL_Color color, brickColor, wallColor;
 	bool running;
 	int frameCount, timerFPS, lastFrame, fps;
 	int playerLives = 3;
-	int dodgeCounter = 0;
-	SDL_Rect l_paddle, r_paddle, ball, score_board, middle_line;
+	SDL_Rect l_paddle, r_paddle, l_wall, r_wall, t_wall, ball, score_board, middle_line;
 	float velX, velY;
 	std::string score = "";
 	int l_s, r_s;
 	bool turn;
 
-public :
+	//Determines how many bricks spawn
+	int numSpawnedBricks = 30;
+	std::vector<int> brickState;
+	std::vector<SDL_Rect> brickPos;
+
+
+public:
 	Game();
 	int start();
 	void serve();  //this starts off the game putting the ball in motion
@@ -38,4 +44,3 @@ public :
 	void render(); //here i define what is being put oncscreen the color and framerate
 
 };
-
