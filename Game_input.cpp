@@ -32,6 +32,9 @@ void Game::input() {
 		l_paddle.x += SPEED; 
 		transVel = 1;
 	}
+	else {
+		transVel = 0;
+	}
 }
 	//while (SDL_PollEvent(&event))
 	//{

@@ -38,13 +38,17 @@ void Game::update() {
 
 	for (int i = 0; i < numSpawnedBricks; i++) {
 		if (SDL_HasIntersection(&brickPos[i], &ball)) {
-			if (brickPos[i].x > ball.w + ball.x || brickPos[i].x < ball.x + brickPos[i].w) {
+			if (brickPos[i].x > ball.w + ball.x || 
+				brickPos[i].x + brickPos[i].w < ball.x ) {
 				velX = -velX;
+
 			}
 			else {
 				velY = -velY;
+
 			}
 			brickState[i]--;
+			break;
 		}
 	}
 
@@ -73,9 +77,9 @@ void Game::update() {
 
 	}
 
- else if (SDL_HasIntersection(&ball, &t_wall)) {
- velY = -velY;
- }
+	else if (SDL_HasIntersection(&ball, &t_wall)) {
+		velY = -velY;
+	}
 
 	ball.x += velX;
 	ball.y += velY;
