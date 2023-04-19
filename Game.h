@@ -34,6 +34,8 @@ class Game
 	std::vector<int> brickState;
 	std::vector<SDL_Rect> brickPos;
 
+	int transVel = 1;
+
 
 public:
 	Game();

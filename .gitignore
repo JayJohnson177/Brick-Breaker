@@ -1,0 +1,6 @@
+.git/
+.vs/
+Debug/
+packages/
+Win32/
+x64/

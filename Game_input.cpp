@@ -24,8 +24,14 @@ void Game::input() {
 	const Uint8* keystates = SDL_GetKeyboardState(NULL);
 	while (SDL_PollEvent(&e)) if (e.type == SDL_QUIT) running = false;
 	if (keystates[SDL_SCANCODE_ESCAPE]) running = false;
-	if (keystates[SDL_SCANCODE_LEFT]) l_paddle.x -= SPEED;
-	if (keystates[SDL_SCANCODE_RIGHT]) l_paddle.x += SPEED;
+	if (keystates[SDL_SCANCODE_LEFT]) { 
+		l_paddle.x -= SPEED; 
+		transVel = -1;
+	}
+	if (keystates[SDL_SCANCODE_RIGHT]) { 
+		l_paddle.x += SPEED; 
+		transVel = 1;
+	}
 }
 	//while (SDL_PollEvent(&event))
 	//{

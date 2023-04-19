@@ -20,8 +20,8 @@ void Game::update() {
 		double rel = (l_paddle.y + (l_paddle.h / 2)) - (ball.y + (SIZE / 2));
 		double norm = rel / (l_paddle.h / 2);
 		double bounce = norm * (5 * PI / 12);
-		velX = BALL_SPEED * cos(bounce);
-		velY = -BALL_SPEED * sin(bounce); 
+		velX = (BALL_SPEED * cos(bounce)) + +transVel;
+		velY =  - BALL_SPEED * sin(bounce);
 	}
 
 	//Checks for collision between the three main walls, flipping the X velocity upon hitting
@@ -29,6 +29,24 @@ void Game::update() {
 	if (SDL_HasIntersection(&ball, &l_wall) || SDL_HasIntersection(&ball, &r_wall)) { velX = -velX; }
 	if (SDL_HasIntersection(&ball, &t_wall)) { velY = -velY; }
 
+	if (SDL_HasIntersection(&l_paddle, &l_wall)) {
+		l_paddle.x = 0;
+	}
+	if (SDL_HasIntersection(&l_paddle, &r_wall)) {
+		l_paddle.x = WIDTH - r_wall.w - l_paddle.w;
+	}
+
+	for (int i = 0; i < numSpawnedBricks; i++) {
+		if (SDL_HasIntersection(&brickPos[i], &ball)) {
+			if (brickPos[i].x > ball.w + ball.x || brickPos[i].x < ball.x + brickPos[i].w) {
+				velX = -velX;
+			}
+			else {
+				velY = -velY;
+			}
+			brickState[i]--;
+		}
+	}
 
 	if (ball.y > r_paddle.y + (r_paddle.h / 2)) r_paddle.y += SPEED;
 	if (ball.y < r_paddle.y + (r_paddle.h / 2)) r_paddle.y -= SPEED;
