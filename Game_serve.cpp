@@ -3,11 +3,13 @@
 #include "Game.h"
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 
 
 //this starts off the game putting the ball in motion
 void Game::serve() {
+
 	//Randomly sets the ball position between the two walls in the arena.
 	ball.x = rand() % ((WIDTH - 15) - 11) + 10;
 	l_paddle.y = r_paddle.y = HEIGHT - l_paddle.h;
@@ -23,6 +25,6 @@ void Game::serve() {
 	}
 	velX = 0;
 	velY = BALL_SPEED;
-	ball.y = 40;
+	ball.y = 110;
 	turn = !turn;
 }

@@ -32,10 +32,6 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Lab5\asteriod.bmp" />
-    <Image Include="..\Lab5\walksequence_spritesheet-512.bmp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

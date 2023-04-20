@@ -3,6 +3,7 @@
 #include "Game.h"
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 
 //here i am adding update functions to various aspects of the game ie: ball state and paddle positions
@@ -29,6 +30,7 @@ void Game::update() {
 	if (SDL_HasIntersection(&ball, &l_wall) || SDL_HasIntersection(&ball, &r_wall)) { velX = -velX; }
 	if (SDL_HasIntersection(&ball, &t_wall)) { velY = -velY; }
 
+	//Stops the paddle from moving into the walls
 	if (SDL_HasIntersection(&l_paddle, &l_wall)) {
 		l_paddle.x = 0;
 	}
@@ -36,16 +38,16 @@ void Game::update() {
 		l_paddle.x = WIDTH - r_wall.w - l_paddle.w;
 	}
 
+	//Checks for collisions between the ball and bricks
+	//breaks if it does to avoid ball bouncing repeatedly between rames
 	for (int i = 0; i < numSpawnedBricks; i++) {
 		if (SDL_HasIntersection(&brickPos[i], &ball)) {
 			if (brickPos[i].x > ball.w + ball.x || 
 				brickPos[i].x + brickPos[i].w < ball.x ) {
 				velX = -velX;
-
 			}
 			else {
 				velY = -velY;
-
 			}
 			brickState[i]--;
 			break;

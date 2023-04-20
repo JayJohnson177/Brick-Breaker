@@ -1,16 +1,23 @@
 #include <iostream>
 #include "SDL.h"
 #include "Game.h"
+#include <iostream>
 
 Game::Game() {
 
 }
+
 int Game::start() {
-
-
 	//my off switch incase something doesnt work
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) std::cout << "Failed at SDL_Init()" << std::endl;
 	if (SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, 0, &window, &renderer) < 0) std::cout << "Failed at SDL_CreateWindowAndRenderer())" << std::endl;
+
+	//Initializes the controller and sets a flag for the input method used
+	ZeroMemory(&controllerState, sizeof(XINPUT_STATE));
+	if (XInputGetState(0, &controllerState) == ERROR_SUCCESS) {
+		std::cout << "Controller connected, using controller inputs" << std::endl;
+		controllerUsed = true;
+	}
 
 	running = 1;
 	static int lastTime = 0;
@@ -68,7 +75,7 @@ int Game::start() {
 		brickPos[i].x = bufferX;
 		brickPos[i].y = bufferY;
 		//Randomly determines how much health the associated brick has
-		brickState[i] = rand() % 4;
+		brickState[i] = (rand() % 3) + 1;
 
 		bufferX = bufferX + 43;
 		//If it starts spawning bricks offscreen, moves the Y buffer down and resets the X buffer
@@ -104,3 +111,5 @@ int Game::start() {
 
 	return 0;
 }
+
+

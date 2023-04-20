@@ -1,6 +1,7 @@
 
 #include "SDL.h"
 #include "Game.h"
+#include <iostream>
 
 
 //here i define the type of controls i am allowing in
@@ -20,21 +21,32 @@ SDL_Event event;
 
 
 void Game::input() {
-	SDL_Event e;
-	const Uint8* keystates = SDL_GetKeyboardState(NULL);
-	while (SDL_PollEvent(&e)) if (e.type == SDL_QUIT) running = false;
-	if (keystates[SDL_SCANCODE_ESCAPE]) running = false;
-	if (keystates[SDL_SCANCODE_LEFT]) { 
-		l_paddle.x -= SPEED; 
-		transVel = -1;
+	//Checks whether controller inputs are being used, and moves the paddle based on the desired input method
+	if (controllerUsed) {
+		short value = getXInput();
+		if (value > 0) { transVel = -1; }
+		if (value < 0) { transVel = 1; }
+		else { transVel = 0; }
+		l_paddle.x += value;
 	}
-	if (keystates[SDL_SCANCODE_RIGHT]) { 
-		l_paddle.x += SPEED; 
-		transVel = 1;
+	if (!controllerUsed) {
+		SDL_Event e;
+		const Uint8* keystates = SDL_GetKeyboardState(NULL);
+		while (SDL_PollEvent(&e)) if (e.type == SDL_QUIT) running = false;
+		if (keystates[SDL_SCANCODE_ESCAPE]) running = false;
+		if (keystates[SDL_SCANCODE_LEFT]) {
+			l_paddle.x -= SPEED;
+			transVel = -1;
+		}
+		if (keystates[SDL_SCANCODE_RIGHT]) {
+			l_paddle.x += SPEED;
+			transVel = 1;
+		}
+		else {
+			transVel = 0;
+		}
 	}
-	else {
-		transVel = 0;
-	}
+
 }
 	//while (SDL_PollEvent(&event))
 	//{
@@ -68,3 +80,11 @@ void Game::input() {
 	//	//	positions[0].y = 0;
 	//}
 
+//Gets the controller state, divides it so it returns between -10 and 10, and returns it
+short Game::getXInput() {
+	ZeroMemory(&controllerState, sizeof(XINPUT_STATE));
+	XInputGetState(0, &controllerState);
+	short value = controllerState.Gamepad.sThumbLX;
+	value = value / 3276;
+	return value;
+}

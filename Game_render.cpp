@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "Game.h"
+#include <iostream>
 
 
 //here i define what is being put oncscreen the color and framerate

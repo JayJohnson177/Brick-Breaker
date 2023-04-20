@@ -3,6 +3,15 @@
 #include <vector>
 #include "SDL.h"
 
+#pragma comment(lib,"XInput.lib")
+#pragma comment(lib,"Xinput9_1_0.lib")
+
+#define  WIN32_LEAN_AND_MEAN 1
+#define NOMINMAX
+
+#include "windows.h"
+#include "xinput.h"
+#include <limits>
 
 
 //here i am defining values for attributes i'll be using later
@@ -34,7 +43,12 @@ class Game
 	std::vector<int> brickState;
 	std::vector<SDL_Rect> brickPos;
 
+	//Used to transfer the paddle velocity to the ball
 	int transVel = 1;
+
+	//Used for controller input
+	XINPUT_STATE controllerState;
+	bool controllerUsed;
 
 
 public:
@@ -44,5 +58,6 @@ public:
 	void update(); //here i am adding update functions to various aspects of the game ie: ball state and paddle positions
 	void input(); //here i define the type of controls i am allowing in
 	void render(); //here i define what is being put oncscreen the color and framerate
+	short getXInput(); //Function to get the analog stick inputs
 
 };
